@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <title>Chatty Walkthrough System</title>
+    </head>
+    <body style="margin: 0; overflow: hidden;">
+        <script src="chatty.js" />
+        <div style="display: flex; flex-flow: column; align-items: stretch; height: 100vh; min-height: 100vh;">
+            <div id="menubar" style="flex: 0 1 auto; border-bottom-style: solid; border-bottom-width: 1px;">
+                <style>
+                    .menu {
+                        padding: 0.2em;
+                        display: inline-block;
+                    }
+                    .menu:hover {
+                        background-color: #D8F0F2;
+                        foreground-color: black;
+                    }
+                    .menu:focus {
+                        background-color: powderblue;
+                        foreground-color: black;
+                    }
+                </style>
+                <div tabindex="0" id="menu-dummy" class="menu">
+                    Dummy Menu
+                </div>
+                <div tabindex="0" id="menu-dummy2" class="menu">
+                    Dummy Menu
+                </div>
+            </div>
+            <div id="content" style="flex: 1 1 auto; overflow: auto;">
+                <p>dummy content</p>
+            </div>
+        </div>
+    </body>
+</html>
