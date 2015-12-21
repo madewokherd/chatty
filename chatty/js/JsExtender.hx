@@ -11,5 +11,10 @@ class JsExtender {
         }
         return false;
     }
+    static public inline function addEventListener(element:Element, event:String, f:Dynamic, useCapture:Bool = false):Void {
+        untyped {
+            untyped element.addEventListener(event, f, useCapture);
+        }
+    }
 }
 

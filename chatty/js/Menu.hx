@@ -34,6 +34,54 @@ class Menu {
         if (this.items.length != 0) {
             set_active_item(this.items[0]);
         }
+
+        if (!is_submenu) {
+            menu_div.addEventListener("keypress", this.on_keypress);
+            menu_div.addEventListener("focus", this.on_focus, true);
+            menu_div.addEventListener("blur", this.on_blur, true);
+        }
+    }
+
+    public function select_prev_item() {
+        var index = 0;
+        while (index < items.length-1) {
+            if (this.items[index] == active_item)
+                break;
+            index++;
+        }
+        if (index == 0) {
+            set_active_item(items[items.length-1]);
+        }
+        else {
+            set_active_item(items[index-1]);
+        }
+    }
+
+    private function on_keypress(e:KeyboardEvent) {
+        if (e.altKey) { }
+        else if (e.ctrlKey) { }
+        else if (e.metaKey) { }
+        else if (e.shiftKey) { }
+        else {
+            switch (e.keyCode) {
+                case 37: /* DOM_VK_LEFT */ {
+                    if (is_menubar) {
+                        select_prev_item();
+                    }
+                }
+            }
+        }
+    }
+
+    private function on_focus(e:Event) {
+        has_focus = true;
+    }
+
+    private function on_blur(e:Event) {
+        if (Browser.document.activeElement == null || !menu_div.contains(Browser.document.activeElement))
+        {
+            has_focus = false;
+        }
     }
 
     public function set_active_item(active_item:MenuItem) {
