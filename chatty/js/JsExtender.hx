@@ -19,5 +19,8 @@ class JsExtender {
     static public function set_aria_hidden(element:Element, hidden:Bool) {
         element.setAttribute("aria-hidden", hidden ? "true" : "false");
     }
+    static public function set_aria_haspopup(element:Element, hidden:Bool) {
+        element.setAttribute("aria-haspopup", hidden ? "true" : "false");
+    }
 }
 

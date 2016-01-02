@@ -20,6 +20,7 @@ class MenuItem {
                     trace(element.id);
                     this.submenu = new Menu(element.id, true);
                     element.set_aria_hidden(true);
+                    div.set_aria_haspopup(true);
                     break;
                 }
             }
