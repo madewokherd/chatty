@@ -14,8 +14,9 @@ class Menu {
     var active_item : MenuItem;
     var is_submenu : Bool;
 
-    public function new(id:String) {
+    public function new(id:String, is_submenu:Bool = false) {
         menu_div = cast(Browser.document.getElementById(id), DivElement);
+        this.is_submenu = is_submenu;
 
         is_menubar = menu_div.classList.contains("menubar");
 
@@ -26,7 +27,6 @@ class Menu {
                 var element = cast (node, Element);
                 if (element.has_role("menuitem")) {
                     this.items.push(new MenuItem(cast (node, DivElement)));
-                    trace(element.id);
                 }
             }
         }
