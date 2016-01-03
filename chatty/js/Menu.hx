@@ -57,6 +57,54 @@ class Menu {
         }
     }
 
+    private function get_open_menus():List<Menu> {
+        var result = new List<Menu>();
+        var parent = this;
+        while (parent != null && !parent.menu_div.get_aria_hidden()) {
+            result.push(parent);
+            if (parent.active_item != null)
+                parent = parent.active_item.submenu;
+            else
+                break;
+        }
+        return result;
+    }
+
+    public function get_active_item():MenuItem {
+        var open_menus = get_open_menus();
+        if (open_menus.first().active_item == null)
+            open_menus.pop();
+        var menu = open_menus.first();
+        if (menu != null)
+            return menu.active_item;
+        return null;
+    }
+
+    public function expand_submenu(item:MenuItem, select_first:Bool) {
+        if (item.submenu.menu_div.get_aria_hidden()) {
+            var items = item.submenu.items;
+            if (items.length != 0) {
+                if (select_first)
+                    item.submenu.set_active_item(items[0]);
+                else
+                    item.submenu.set_active_item(items[items.length-1]);
+            }
+            var submenu_div = item.submenu.menu_div;
+            var item_div = item.div;
+            submenu_div.setAttribute("style", "left: "+item_div.offsetLeft+"; top: " + (item_div.offsetTop + item_div.offsetHeight) + ";");
+            item.submenu.menu_div.set_aria_hidden(false);
+        }
+    }
+
+    public function invoke_item(item:MenuItem) {
+        if (item.submenu != null) {
+            if (item.submenu.menu_div.get_aria_hidden()) {
+                expand_submenu(item, true);
+            }
+            /* else collapse_submenu */
+        }
+    }
+
     private function on_keypress(e:KeyboardEvent) {
         if (e.altKey) { }
         else if (e.ctrlKey) { }
@@ -67,6 +115,12 @@ class Menu {
                 case 37: /* DOM_VK_LEFT */ {
                     if (is_menubar) {
                         select_prev_item();
+                    }
+                }
+                case 32 /* DOM_VK_SPACE */ | 13 /* DOM_VK_RETURN */: {
+                    var item = get_active_item();
+                    if (item != null) {
+                        invoke_item(item);
                     }
                 }
             }
@@ -96,7 +150,7 @@ class Menu {
                     item.div.tabIndex = -1;
             }
         }
-        if (has_focus) {
+        if (has_focus && active_item != null) {
             active_item.div.focus();
         }
     }

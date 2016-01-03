@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
         <title>Chatty Walkthrough System</title>
-        <style>
+        <style id="stylesheet">
             /* outermost layout */
             body {
                 margin: 0;
@@ -45,6 +45,12 @@
             }
             .submenu[aria-hidden=true] {
                 display: none;
+            }
+            .submenu {
+                position: absolute;
+                border-style: solid;
+                border-width: 1px;
+                /* background set by chatty.js.Main.add_background_css */
             }
         </style>
     </head>
