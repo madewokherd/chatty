@@ -18,9 +18,9 @@ class Main {
     }
 
     static function add_background_css() {
-        var style:StyleElement = cast (Browser.document.getElementById("stylesheet"), StyleElement);
+        var style:StyleElement = cast Browser.document.getElementById("stylesheet");
 
-        var sheet = cast (style.sheet, CSSStyleSheet);
+        var sheet:CSSStyleSheet = cast style.sheet;
 
         var default_background:String;
 

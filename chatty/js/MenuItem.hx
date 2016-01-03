@@ -15,7 +15,7 @@ class MenuItem {
         for (node in div.children) {
             if (node.nodeType == Node.ELEMENT_NODE)
             {
-                var element = cast (node, Element);
+                var element:Element = cast node;
                 if (element.classList.contains("submenu")) {
                     trace(element.id);
                     this.submenu = new Menu(element.id, true);
