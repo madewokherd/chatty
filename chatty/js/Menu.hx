@@ -72,8 +72,13 @@ class Menu {
 
     public function get_active_item():MenuItem {
         var open_menus = get_open_menus();
-        if (open_menus.first().active_item == null)
+        if (open_menus.first() == null)
+            return null;
+        if (open_menus.first().active_item == null) {
             open_menus.pop();
+            if (open_menus.first() == null)
+                return null;
+        }
         var menu = open_menus.first();
         if (menu != null)
             return menu.active_item;
@@ -94,6 +99,18 @@ class Menu {
             submenu_div.setAttribute("style", "left: "+item_div.offsetLeft+"; top: " + (item_div.offsetTop + item_div.offsetHeight) + ";");
             item.submenu.menu_div.set_aria_hidden(false);
         }
+    }
+
+    public function collapse_to(menu:Menu) {
+        for (open_menu in get_open_menus()) {
+            if (open_menu == menu)
+                break;
+            open_menu.menu_div.set_aria_hidden(true);
+        }
+    }
+
+    public function collapse_all() {
+        collapse_to(this);
     }
 
     public function invoke_item(item:MenuItem) {
@@ -139,6 +156,9 @@ class Menu {
     }
 
     public function set_active_item(active_item:MenuItem) {
+        if (this.active_item == active_item)
+            return;
+        collapse_all();
         this.active_item = active_item;
         for (item in items) {
             if (item == active_item) {
