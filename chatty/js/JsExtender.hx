@@ -25,5 +25,8 @@ class JsExtender {
     static public function set_aria_haspopup(element:Element, hidden:Bool) {
         element.setAttribute("aria-haspopup", hidden ? "true" : "false");
     }
+    static public function set_aria_active_descendant(element:Element, id:String) {
+        element.setAttribute("aria-activedescendant", id);
+    }
 }
 

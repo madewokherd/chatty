@@ -159,9 +159,15 @@ class Menu {
         if (this.active_item == active_item)
             return;
         collapse_all();
+        if (this.active_item != null) {
+            this.active_item.div.classList.remove("active");
+        }
+        active_item.div.classList.add("active");
         this.active_item = active_item;
         for (item in items) {
             if (item == active_item) {
+                if (is_submenu)
+                    menu_div.set_aria_active_descendant(item.div.id);
                 if (!is_submenu)
                     item.div.tabIndex = 0;
             }
