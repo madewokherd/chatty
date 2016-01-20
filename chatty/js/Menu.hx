@@ -160,6 +160,15 @@ class Menu {
                         menu.select_prev_item();
                     }
                 }
+                case 39: /* DOM_VK_RIGHT */ {
+                    var menu = get_open_menus().first();
+                    if (!menu.is_menubar && menu.active_item != null && menu.active_item.submenu != null) {
+                        menu.expand_submenu(menu.active_item, true);
+                    }
+                    else if (is_menubar) {
+                        select_next_item();
+                    }
+                }
                 case 40: /* DOM_VK_DOWN */ {
                     var menu = get_open_menus().first();
                     if (menu.is_menubar) {
