@@ -134,6 +134,17 @@ class Menu {
                         select_prev_item();
                     }
                 }
+                case 38: /* DOM_VK_UP */ {
+                    var menu = get_open_menus().first();
+                    if (menu.is_menubar) {
+                        if (menu.active_item != null && menu.active_item.submenu != null) {
+                            menu.expand_submenu(menu.active_item, false);
+                        }
+                    }
+                    else {
+                        menu.select_prev_item();
+                    }
+                }
                 case 32 /* DOM_VK_SPACE */ | 13 /* DOM_VK_RETURN */: {
                     var item = get_active_item();
                     if (item != null) {
