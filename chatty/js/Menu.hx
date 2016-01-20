@@ -111,7 +111,10 @@ class Menu {
             }
             var submenu_div = item.submenu.menu_div;
             var item_div = item.div;
-            submenu_div.setAttribute("style", "left: "+item_div.offsetLeft+"; top: " + (item_div.offsetTop + item_div.offsetHeight) + ";");
+            if (item_div.classList.contains("menuitem"))
+                submenu_div.setAttribute("style", "left: " + (item_div.offsetLeft + item_div.offsetWidth) + "px; top: "+item_div.offsetTop+"px;");
+            else
+                submenu_div.setAttribute("style", "left: "+item_div.offsetLeft+"px; top: " + (item_div.offsetTop + item_div.offsetHeight) + "px;");
             item.submenu.menu_div.set_aria_hidden(false);
         }
     }
