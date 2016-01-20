@@ -57,6 +57,21 @@ class Menu {
         }
     }
 
+    public function select_next_item() {
+        var index = 0;
+        while (index < items.length-1) {
+            if (this.items[index] == active_item)
+                break;
+            index++;
+        }
+        if (index == items.length-1) {
+            set_active_item(items[0]);
+        }
+        else {
+            set_active_item(items[index+1]);
+        }
+    }
+
     private function get_open_menus():List<Menu> {
         var result = new List<Menu>();
         var parent = this;
@@ -143,6 +158,17 @@ class Menu {
                     }
                     else {
                         menu.select_prev_item();
+                    }
+                }
+                case 40: /* DOM_VK_DOWN */ {
+                    var menu = get_open_menus().first();
+                    if (menu.is_menubar) {
+                        if (menu.active_item != null && menu.active_item.submenu != null) {
+                            menu.expand_submenu(menu.active_item, true);
+                        }
+                    }
+                    else {
+                        menu.select_next_item();
                     }
                 }
                 case 32 /* DOM_VK_SPACE */ | 13 /* DOM_VK_RETURN */: {
