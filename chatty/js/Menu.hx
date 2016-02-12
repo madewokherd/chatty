@@ -149,7 +149,11 @@ class Menu {
             var keyCode:Int = untyped(e.which || e.keyCode);
             switch (keyCode) {
                 case 27: /* DOM_VK_ESCAPE */ {
-                    collapse_all();
+                    var menus = get_open_menus();
+                    var menu = menus.pop();
+                    var parent = menus.pop();
+                    if (parent != null)
+                        collapse_to(parent);
                 }
                 case 37: /* DOM_VK_LEFT */ {
                     var menus = get_open_menus();
