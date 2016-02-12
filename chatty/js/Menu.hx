@@ -214,6 +214,35 @@ class Menu {
                         invoke_item(item);
                     }
                 }
+                default: {
+                    if ((keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122)) {
+                        /* letter character - select next item starting with this letter */
+                        var menu = get_open_menus().first();
+                        if (menu != null)
+                        {
+                            var seen_active = false;
+                            var next_item:MenuItem = null;
+                            for (item in menu.items) {
+                                if (item == menu.active_item) {
+                                    seen_active = true;
+                                }
+                                else {
+                                    if (item.text.charAt(0).toLowerCase().charCodeAt(0) == keyCode | 32) {
+                                        if (seen_active) {
+                                            next_item = item;
+                                            break;
+                                        }
+                                        else if (next_item == null)
+                                            next_item = item;
+                                    }
+                                }
+                            }
+                            if (next_item != null) {
+                                menu.set_active_item(next_item);
+                            }
+                        }
+                    }
+                }
             }
         }
     }

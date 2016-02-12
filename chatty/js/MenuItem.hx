@@ -4,10 +4,13 @@ import js.*;
 import js.html.*;
 
 using chatty.js.JsExtender;
+using StringTools;
 
 class MenuItem {
     public var div : DivElement;
     public var submenu : Menu;
+
+    public var text(get, never) : String;
 
     public function new(div:DivElement) {
         this.div = div;
@@ -25,6 +28,18 @@ class MenuItem {
                 }
             }
         }
+    }
+
+    public function get_text() : String {
+        for (node in div.childNodes) {
+            if (node.nodeType == 3) {
+                /* Text */
+                var text = node.textContent.trim();
+                if (text != "")
+                    return text;
+            }
+        }
+        return "";
     }
 }
 
