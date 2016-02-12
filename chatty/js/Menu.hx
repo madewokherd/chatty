@@ -185,6 +185,8 @@ class Menu {
                     }
                     else if (is_menubar) {
                         select_next_item();
+                        if (menu != this && active_item != null && active_item.submenu != null)
+                            expand_submenu(active_item, true);
                     }
                 }
                 case 40: /* DOM_VK_DOWN */ {
