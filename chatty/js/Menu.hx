@@ -147,6 +147,9 @@ class Menu {
         else if (e.shiftKey) { }
         else {
             switch (e.keyCode) {
+                case 27: /* DOM_VK_ESCAPE */ {
+                    collapse_all();
+                }
                 case 37: /* DOM_VK_LEFT */ {
                     var menus = get_open_menus();
                     var menu = menus.pop();
