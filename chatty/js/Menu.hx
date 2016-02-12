@@ -148,8 +148,23 @@ class Menu {
         else {
             switch (e.keyCode) {
                 case 37: /* DOM_VK_LEFT */ {
-                    if (is_menubar) {
-                        select_prev_item();
+                    var menus = get_open_menus();
+                    var menu = menus.pop();
+                    var parent = menus.pop();
+                    if (menu != null) {
+                        if (menu.is_menubar) {
+                            menu.select_prev_item();
+                        }
+                        else if (parent != null) {
+                            if (parent.is_menubar) {
+                                parent.select_prev_item();
+                                if (parent.active_item != null && parent.active_item.submenu != null)
+                                    parent.expand_submenu(parent.active_item, true);
+                            }
+                            else {
+                                collapse_to(parent);
+                            }
+                        }
                     }
                 }
                 case 38: /* DOM_VK_UP */ {
