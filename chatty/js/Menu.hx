@@ -146,7 +146,8 @@ class Menu {
         else if (e.metaKey) { }
         else if (e.shiftKey) { }
         else {
-            switch (e.keyCode) {
+            var keyCode:Int = untyped(e.which || e.keyCode);
+            switch (keyCode) {
                 case 27: /* DOM_VK_ESCAPE */ {
                     collapse_all();
                 }
